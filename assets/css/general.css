@@ -11,23 +11,24 @@ body {
 }
 
 .underground_map map {
-    position: fixed;
+    position: relative;
+    display: block;
     z-index: 0;
     height: 600px;
     width: 800px;
 }
 
 .underground_map .clickbox {
-    position: fixed;
-    opacity: 1;
-    z-index: 2;
+    position: relative;
+    opacity: 0.5;
+    z-index: 1;
 }
 
 .underground_map .one {
     top: 100px;
     left: 100px;
     height: 100px;
-    width: 100px;
+    width: 200px;
     border-radius: 8px;
 }
 
