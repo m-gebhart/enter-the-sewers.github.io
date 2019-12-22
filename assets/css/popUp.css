@@ -13,7 +13,7 @@
 
 .popUpBox {
     background-color: darkblue;
-    display: block;
+    display: inline;
     position: fixed;
     width: 5%;
     height: 5%;
