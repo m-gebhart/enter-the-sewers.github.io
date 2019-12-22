@@ -1,0 +1,49 @@
+body {
+    color: white;
+    font-family: 'Segoe UI Light', Geneva, Verdana, sans-serif;
+    background-color: black;
+}
+
+.underground_map {
+    position: center;
+    top: 0;
+}
+
+.underground_map img {
+    position: relative;
+    top: 0;
+    z-index: 0;
+    height: 600px;
+    width: 800px;
+}
+
+.underground_map .clickbox {
+    position: absolute;
+    visibility: visible;
+    background-color: rgba(255, 216, 0, 0);
+    z-index: 2;
+}
+
+.underground_map .one {
+    top: 250px;
+    left: 370px;
+    height: 100px;
+    width: 100px;
+    border-radius: 8px;
+}
+
+.underground_map .two {
+    top: 0%;
+    left: 0;
+    height: 100px;
+    width: 100px;
+    border-radius: 8px;
+}
+
+.underground_map .three {
+    top: 0;
+    right: 0;
+    height: 100px;
+    width: 100px;
+    border-radius: 8px;
+}

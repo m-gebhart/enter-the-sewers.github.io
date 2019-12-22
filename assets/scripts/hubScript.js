@@ -31,7 +31,7 @@ function check_Keyword(word) {
 
 function load_txtFile(episodeStr, target) {
     var txtFile = new XMLHttpRequest();
-    txtFile.open("GET", "/assets/txts/episode"+episodeStr+".txt", true);
+    txtFile.open("GET", "/assets/txt/episode"+episodeStr+".txt", true);
     txtFile.onreadystatechange = function () {
         if (txtFile.readyState === 4 && txtFile.status == 200) {
             content = txtFile.responseText;
