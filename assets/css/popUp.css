@@ -1,5 +1,5 @@
 .popUpBackground {
-    display: block;
+    display: inline;
     position: fixed;
     z-index: 1;
     color: white;
