@@ -1,5 +1,5 @@
 var progression = 1;
-var highlightColor = 'rgba(255, 216, 0, 0.75)'
+var highlightOpacity = '0.75'
 var popUpBGColor = 'rgba(0, 0, 0, 1)'
 
 function open_PopUp(clickbox, episode) {
@@ -12,7 +12,7 @@ function open_PopUp(clickbox, episode) {
 
 function highlight_box(clickbox) {
     clickbox.style.transitionDuration = '1s';
-    clickbox.style.backgroundColor = highlightColor;
+    clickbox.style.opacity = highlightOpacity;
 }
 
 function create_episodePopUp(episodeStr)
