@@ -9,7 +9,7 @@ body {
     top: 0;
 }
 
-.underground_map img {
+.underground_map image {
     position: relative;
     top: 0;
     z-index: 0;
