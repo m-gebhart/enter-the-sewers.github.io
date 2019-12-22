@@ -18,15 +18,14 @@ body {
 }
 
 .underground_map .clickbox {
-    position: absolute;
-    display: inline;
-    opacity: 0;
+    position: fixed;
+    opacity: 1;
     z-index: 2;
 }
 
 .underground_map .one {
-    top: 200px;
-    left: 200px;
+    top: 100px;
+    left: 100px;
     height: 100px;
     width: 100px;
     border-radius: 8px;
