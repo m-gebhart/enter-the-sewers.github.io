@@ -1,0 +1,13 @@
+/*---- Footer Data ----*/
+.footer {
+    position: relative;
+    color: white;
+    bottom: 0;
+    z-index: -5;
+    width: 100%;
+    text-align: center;
+    background-color: black !important;
+    border-top: solid;
+    border-top-color: white;
+    border-width: 1px;
+}
