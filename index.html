@@ -4,16 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=1.5, minimum-scale=1.0">
     <title>enterTheSewers</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/styles.css">    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" />
+    <link rel="stylesheet" type="text/css" href="assets/css/styles.css">    <link type="application/atom+xml" rel="alternate" href="/feed.xml" />
     <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>enterTheSewers</title>
 <meta name="generator" content="Jekyll v3.8.5" />
 <meta property="og:title" content="enterTheSewers" />
 <meta property="og:locale" content="en_US" />
-<link rel="canonical" href="http://localhost:4000/" />
-<meta property="og:url" content="http://localhost:4000/" />
 <script type="application/ld+json">
-{"headline":"enterTheSewers","@type":"WebSite","url":"http://localhost:4000/","@context":"https://schema.org"}</script>
+{"headline":"enterTheSewers","@type":"WebSite","url":"/","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 </head>
@@ -24,7 +22,13 @@
     <div class="underground_map">
         <img src="assets/images/underground_map.png" class="map" alt="map" />
         <img src="assets/images/clickbox.png" class="clickbox one" alt="" onclick="open_PopUp(this, 1)" />
-        <div class="popUpBox" id="popUpBox"></div>
+        <div class="popUpBox" id="popUpBox">
+			<div class="popUpHeader" id="popUpHeader">
+				<div class="close" id="close" onclick="close_PopUp()">(close)</div>
+			</div>
+			<div class="popUpBody" id="popUpBody"></div>
+			<div class="popUpSearchBar" id="popUpSearchBar"></div>
+		</div>
     </div>
 </div>
 

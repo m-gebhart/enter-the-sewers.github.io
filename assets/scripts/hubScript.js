@@ -1,12 +1,20 @@
+var titles = ['ABANDONMENT', 'GHOSTS', 'RESISTANCE'];
+var displayed = false;
 var progression = 1;
-var highlightOpacity = '0.75'
-var popUpBGColor = 'rgba(0, 0, 0, 1)'
+var highlightOpacity = '0.75';
+var clickedOpacity = '0.5';
+var popUpBGColor = 'rgba(0, 0, 0, 1)';
+var textDelay = 2;
+var closeVar;
 
-function open_PopUp(clickbox, episode) {
-    if (episode <= progression)
+function open_PopUp(clickbox, episodeInt) {
+    if (episodeInt <= progression)
     {
         highlight_box(clickbox);
-        create_episodePopUp(String(episode));
+        create_episodePopUp(episodeInt);
+        sleep(2000).then(() => {
+            clickbox.style.opacity = clickedOpacity;
+        })
     }
 }
 
@@ -15,17 +23,37 @@ function highlight_box(clickbox) {
     clickbox.style.opacity = highlightOpacity;
 }
 
-function create_episodePopUp(episodeStr)
+function create_episodePopUp(episodeInt)
 {
-    var popUp = document.getElementById('popUpBackground');
-    popUp.style.transitionDuration = '1s'
-    popUp.style.transitionDelay = '2s';
-    popUp.style.backgroundColor = popUpBGColor;
-    setTimeout(load_txtFile(episodeStr, document.getElementById('popUpBox')), 5000);
+    if (!displayed) {
+        //Getting references from box / index.html
+        var popUp = document.getElementById('popUpBox');
+        var popUpBG = document.getElementById('popUpBackground');
+        var popUpHeader = document.getElementById('popUpHeader');
+        var popUpBody = document.getElementById('popUpBody');
+        var popUpSearchBar = document.getElementById('popUpSearchBar');
+        closeVar = document.getElementById('close');
+
+        //Animating Creation of Box via css
+        popUpHeader.innerHTML = '';
+        popUp.style.display = 'block';
+        popUpBG.style.backgroundColor = popUpBGColor;
+        popUp.classList.toggle("openBox", true);
+        displayed = true;
+
+        sleep(textDelay * 1000).then(() => {
+            //filling the box with content
+            closeVar.style.display = 'block';
+            popUpSearchBar.style.display = 'block';
+            load_txtFile(String(episodeInt), popUpBody);
+            popUpHeader.innerHTML = titles[episodeInt - 1];
+            popUpHeader.appendChild(closeVar);
+        })
+    }
 }
 
 function check_Keyword(word) {
-    if (word = 'example')
+    if (word == 'example')
         progression++;
 }
 
@@ -37,16 +65,29 @@ function load_txtFile(episodeStr, target) {
             content = txtFile.responseText;
         }
         target.innerHTML = content;
-        target.classList.toggle("openBox");
     }
     txtFile.send(null);
 }
 
-function sleep()
-{
-    //coming soon
+const sleep = (ms) => {
+    return new Promise(resolve => setTimeout(resolve, ms))
 }
 
 function check_searchBar() {
     progression++;
+}
+
+function close_PopUp() {
+    if (displayed) {
+        displayed = false;
+        var popUp = document.getElementById('popUpBox');
+        popUp.classList.toggle("openBox", false);
+        popUp.classList.toggle("popUpBox", true);
+        empty_innerHTML();
+    }
+}
+
+function empty_innerHTML() {
+    document.getElementById('popUpSearchBar').style.display = 'none';
+    document.getElementById('popUpBody').innerHTML = '';
 }
