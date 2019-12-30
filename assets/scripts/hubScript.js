@@ -47,7 +47,6 @@ function create_episodePopUp(episodeInt)
         popUp.style.display = 'block';
         popUpBG.style.backgroundColor = popUpBGColor;
         popUp.classList.toggle("openBox", true);
-        displayed = true;
 
         sleep(textDelay * 1000).then(() => {
             //filling the box with content (to-do, one after one anims)
@@ -57,6 +56,8 @@ function create_episodePopUp(episodeInt)
             load_txtFile(String(episodeInt), popUpBody);
             sleep(animTimeFloat*1000).then(() => {
                 popUpSearchBar.style.display = 'block';
+                popUpSearchBar.focus();
+                displayed = true;
             })
         })
     }

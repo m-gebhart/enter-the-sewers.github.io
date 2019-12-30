@@ -18,13 +18,13 @@
 <body>
     <script src="assets/scripts/hubScript.js"></script>
 
-<div class="popUpBackground" id="popUpBackground">
+<div class="popUpBackground" id="popUpBackground" onclick="close_PopUp()">
     <div class="underground_map">
         <img src="assets/images/underground_map.png" class="map" alt="map" />
         <img src="assets/images/clickbox.png" class="clickbox one" alt="" onclick="open_PopUp(this, 1)" />
         <div class="popUpBox" id="popUpBox">
 			<div class="popUpHeader" id="popUpHeader">
-				<div class="close" id="close" onclick="close_PopUp()">(close)</div>
+				<div class="close" id="close" onclick="close_PopUp()">&times;</div>
 			</div>
 			<div class="popUpBody" id="popUpBody"></div>
 			<input type="textField" id="popUpSearchBar" placeholder="???" onkeypress="check_Progression(event)" />

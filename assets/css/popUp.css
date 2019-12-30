@@ -12,7 +12,7 @@
 }
 
 .popUpBox {
-    background-color: darkblue;
+    background-color: black;
     display: block;
     position: fixed;
     width: 5%;
@@ -25,22 +25,27 @@
 
 .close {
     top: 0;
+    font-size: large;
+    cursor: default;
+    color: red;
     float: right;
     display: none;
 }
 
 .popUpBox .popUpHeader {
     text-decoration: underline;
-    padding-left: 10%;
+    padding-left: 7%;
 }
 
 .popUpBox .popUpBody {
-    padding: 10%;
+    padding: 7%;
 }
 
-.popUpBox .input[type=textField] {
-    padding-left: 40%;
-    left: 200px;
+.popUpBox input[type=textField] {
+    padding-left: 7%;
+    background-color: black;
+    color: white;
+    border: none;
 }
 
 .openBox {
