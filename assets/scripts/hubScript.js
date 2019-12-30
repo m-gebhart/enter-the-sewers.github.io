@@ -1,5 +1,5 @@
 var titles = ['ALL BY MYSELF', 'THE MAN IN THE PAINTING', 'SHEEP AMONG WOLVES'];
-var keywords = [['Abandonment', 'abandonment', 'I walk alone', 'i walk alone', 'I WALK ALONE'], ['Ghosts', 'ghosts'], ['Resistance', 'resistance']];
+var keywords = [['I walk alone', 'i walk alone', 'I WALK ALONE'], ['Ghosts', 'ghosts'], ['Resistance', 'resistance']];
 
 var displayed = false;
 var inProcess = false;
@@ -97,8 +97,9 @@ function check_Keyword(word) {
         progressionInt++;
 }
 
+//closing popUp when clicking outside of it
 window.onclick = function (event) {
-    if (event.target.nodeName == "IMG")
+    if (event.target.classList.contains("map") || event.target.classList.contains("underground_map"))
         close_PopUp();
 }
 

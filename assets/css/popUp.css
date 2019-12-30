@@ -5,13 +5,13 @@
     left: 0;
     top: 0;
     width: 100%;
-    height: 100%; 
-    overflow: auto; 
+    height: 100%;
+    color: white;
+    overflow: auto;
     background-color: rgba(0, 0, 0, 1);
 }
 
 .popUpBox {
-    color: white;
     background-color: black;
     display: block;
     position: fixed;
@@ -57,4 +57,5 @@
     left: 5%;
     width: 80%;
     height: 80%;
+    z-index: 2;
 }
