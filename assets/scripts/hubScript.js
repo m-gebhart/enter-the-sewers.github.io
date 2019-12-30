@@ -11,6 +11,7 @@ var unlockedOpacity = 0.5;
 var passedOpacity = 0.3;
 var clickedOpacity = 0.9;
 var popUpBGColor = 'rgba(0, 0, 0, 1)';
+var messageTransitionDuration = "0.5s";
 var textDelay = 2;
 var closeVar;
 
@@ -97,16 +98,19 @@ function check_Keyword(event) {
 }
 
 function open_welcomeMessage(message) {
-    message.style.transitionDuration = '0.5s';
-    message.style.backgroundColor = "rgba(0, 0, 0, 1.0)";
-    message.style.color = "rgba(255, 255, 0, 1.0)";
+    message.style.display = "block";
+    sleep(messageTransitionDuration / 2 * 1000).then(() => {
+        message.style.transitionDuration = '0.5s';
+        message.style.backgroundColor = "rgba(0, 0, 0, 1.0)";
+        message.style.color = "rgba(255, 255, 0, 1.0)";
+    })
 }
 
 function close_welcomeMessage(message) {
     message.style.transitionDuration = '0.5s';
     message.style.backgroundColor = "rgba(0, 0, 0, 0.0)";
     message.style.color = "rgba(255, 255, 0, 0.0)";
-    sleep(message.style.transitionDuration / 2 * 1000).then(() => {
+    sleep(messageTransitionDuration / 2 * 1000).then(() => {
         message.style.display = "none";
         welcomeMessagePassed = true;
     })
