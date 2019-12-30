@@ -3,30 +3,31 @@ var keywords = [['I walk alone', 'i walk alone', 'I WALK ALONE'], ['Ghosts', 'gh
 
 var displayed = false;
 var inProcess = false;
-var progressionInt = 1;
+var progressionInt = 0;
 var currentEpisodeInt = 0;
 var animTimeFloat = 0.1;
-var highlightOpacity = '0.75';
-var clickedOpacity = '0.5';
+var unlockedOpacity = 0.5;
+var clickedOpacity = 0.9;
 var popUpBGColor = 'rgba(0, 0, 0, 1)';
 var textDelay = 2;
 var closeVar;
 
-function open_PopUp(clickbox, episodeInt) {
-    if (episodeInt <= progressionInt)
+function open_PopUp(episodeInt) {
+    if (episodeInt <= progressionInt && progressionInt != 0)
     {
-        currentEpisodeInt = episodeInt-1;
-        highlight_box(clickbox);
+        currentEpisodeInt = episodeInt;
+        highlight_box(document.getElementById('box' + String(episodeInt)), clickedOpacity);
         create_episodePopUp(episodeInt);
-        sleep(2000).then(() => {
-            clickbox.style.opacity = clickedOpacity;
-        })
     }
 }
 
-function highlight_box(clickbox) {
+function highlight_box(clickbox, opacityFloat) {
     clickbox.style.transitionDuration = '1s';
-    clickbox.style.opacity = highlightOpacity;
+    clickbox.style.opacity = opacityFloat;
+}
+
+function close_introMessage() {
+    highlight_box(document.getElementById("box1"), unlockedOpacity);
 }
 
 function create_episodePopUp(episodeInt)
@@ -83,29 +84,36 @@ const sleep = (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms))
 }
 
-function check_Progression(event) {
+function check_Keyword(event) {
     if (event.keyCode == 13) {
         var solution = document.getElementById('popUpSearchBar').value;
-        for (var i = 0; i < keywords[currentEpisodeInt].length; i++)
-            if (keywords[currentEpisodeInt][i] == solution)
+        for (var i = 0; i < keywords[currentEpisodeInt-1].length; i++)
+            if (keywords[currentEpisodeInt-1][i] == solution) {
                 close_PopUp();
+                progressionInt++;
+                highlight_box(document.getElementById("box" + String(progressionInt)), unlockedOpacity);
+            }
     }
 }
 
-function check_Keyword(word) {
-    if (word == 'example')
-        progressionInt++;
-}
-
-//closing popUp when clicking outside of it
 window.onclick = function (event) {
-    if (event.target.classList.contains("map") || event.target.classList.contains("underground_map"))
-        close_PopUp();
+    //display first box
+    if (progressionInt == 0) {
+        progressionInt++;
+        close_introMessage();
+    }
+
+    //closing popUp when clicking outside of it
+    if (displayed && (event.target.classList.contains("map")
+        || event.target.classList.contains("underground_map")
+        || event.target.classList.contains("popUpBackground")))
+            close_PopUp();
 }
 
 function close_PopUp() {
     if (displayed) {
         displayed = false;
+        highlight_box(document.getElementById('box' + String(currentEpisodeInt)), unlockedOpacity);
         var popUp = document.getElementById('popUpBox');
         popUp.classList.toggle("openBox", false);
         popUp.classList.toggle("popUpBox", true);

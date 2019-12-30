@@ -32,6 +32,22 @@ body {
 }
 
 .underground_map .two {
+    top: 0px;
+    left: 0px;
+    height: 100px;
+    width: 100px;
+    border-radius: 8px;
+}
+
+.underground_map .three {
+    top: 20px;
+    left: 500px;
+    height: 100px;
+    width: 100px;
+    border-radius: 8px;
+}
+
+.underground_map .two {
     top: 0%;
     left: 0;
     height: 100px;
