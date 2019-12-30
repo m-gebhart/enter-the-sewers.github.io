@@ -1,6 +1,10 @@
-var titles = ['ABANDONMENT', 'GHOSTS', 'RESISTANCE'];
+var titles = ['ALL BY MYSELF', 'THE MAN IN THE PAINTING', 'SHEEP AMONG WOLVES'];
+var keywords = [['Abandonment', 'abandonment', 'I walk alone', 'i walk alone', 'I WALK ALONE'], ['Ghosts', 'ghosts'], ['Resistance', 'resistance']];
+
 var displayed = false;
-var progression = 1;
+var progressionInt = 1;
+var currentEpisodeInt = 0;
+var animTimeFloat = 0.1;
 var highlightOpacity = '0.75';
 var clickedOpacity = '0.5';
 var popUpBGColor = 'rgba(0, 0, 0, 1)';
@@ -8,8 +12,9 @@ var textDelay = 2;
 var closeVar;
 
 function open_PopUp(clickbox, episodeInt) {
-    if (episodeInt <= progression)
+    if (episodeInt <= progressionInt)
     {
+        currentEpisodeInt = episodeInt-1;
         highlight_box(clickbox);
         create_episodePopUp(episodeInt);
         sleep(2000).then(() => {
@@ -35,26 +40,26 @@ function create_episodePopUp(episodeInt)
         closeVar = document.getElementById('close');
 
         //Animating Creation of Box via css
+        //Empty existing content
         popUpHeader.innerHTML = '';
+        empty_innerHTML();
+
         popUp.style.display = 'block';
         popUpBG.style.backgroundColor = popUpBGColor;
         popUp.classList.toggle("openBox", true);
         displayed = true;
 
         sleep(textDelay * 1000).then(() => {
-            //filling the box with content
+            //filling the box with content (to-do, one after one anims)
             closeVar.style.display = 'block';
-            popUpSearchBar.style.display = 'block';
-            load_txtFile(String(episodeInt), popUpBody);
             popUpHeader.innerHTML = titles[episodeInt - 1];
             popUpHeader.appendChild(closeVar);
+            load_txtFile(String(episodeInt), popUpBody);
+            sleep(animTimeFloat*1000).then(() => {
+                popUpSearchBar.style.display = 'block';
+            })
         })
     }
-}
-
-function check_Keyword(word) {
-    if (word == 'example')
-        progression++;
 }
 
 function load_txtFile(episodeStr, target) {
@@ -73,8 +78,18 @@ const sleep = (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms))
 }
 
-function check_searchBar() {
-    progression++;
+function check_Progression(event) {
+    if (event.keyCode == 13) {
+        var solution = document.getElementById('popUpSearchBar').value;
+        for (var i = 0; i < keywords[currentEpisodeInt].length; i++)
+            if (keywords[currentEpisodeInt][i] == solution)
+                close_PopUp();
+    }
+}
+
+function check_Keyword(word) {
+    if (word == 'example')
+        progressionInt++;
 }
 
 function close_PopUp() {
@@ -89,5 +104,6 @@ function close_PopUp() {
 
 function empty_innerHTML() {
     document.getElementById('popUpSearchBar').style.display = 'none';
+    document.getElementById('popUpSearchBar').value = '';
     document.getElementById('popUpBody').innerHTML = '';
 }

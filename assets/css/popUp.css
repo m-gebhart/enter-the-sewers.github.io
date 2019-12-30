@@ -38,9 +38,9 @@
     padding: 10%;
 }
 
-.popUpBox .popUpSearchBar {
-    padding: 10%;
-    display: none;
+.popUpBox .input[type=textField] {
+    padding-left: 40%;
+    left: 200px;
 }
 
 .openBox {
