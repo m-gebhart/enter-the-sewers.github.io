@@ -3,10 +3,12 @@ var keywords = [['I walk alone', 'i walk alone', 'I WALK ALONE'], ['Ghosts', 'gh
 
 var displayed = false;
 var inProcess = false;
-var progressionInt = 0;
+var welcomeMessagePassed = false;
+var progressionInt = -2;
 var currentEpisodeInt = 0;
 var animTimeFloat = 0.1;
 var unlockedOpacity = 0.5;
+var passedOpacity = 0.3;
 var clickedOpacity = 0.9;
 var popUpBGColor = 'rgba(0, 0, 0, 1)';
 var textDelay = 2;
@@ -24,10 +26,6 @@ function open_PopUp(episodeInt) {
 function highlight_box(clickbox, opacityFloat) {
     clickbox.style.transitionDuration = '1s';
     clickbox.style.opacity = opacityFloat;
-}
-
-function close_introMessage() {
-    highlight_box(document.getElementById("box1"), unlockedOpacity);
 }
 
 function create_episodePopUp(episodeInt)
@@ -90,17 +88,47 @@ function check_Keyword(event) {
         for (var i = 0; i < keywords[currentEpisodeInt-1].length; i++)
             if (keywords[currentEpisodeInt-1][i] == solution) {
                 close_PopUp();
-                progressionInt++;
-                highlight_box(document.getElementById("box" + String(progressionInt)), unlockedOpacity);
+                if (progressionInt == currentEpisodeInt) {
+                    progressionInt++;
+                    highlight_box(document.getElementById("box" + String(progressionInt)), unlockedOpacity);
+                }
             }
     }
 }
 
+function open_welcomeMessage(message) {
+    message.style.transitionDuration = '0.5s';
+    message.style.backgroundColor = "rgba(0, 0, 0, 1.0)";
+    message.style.color = "rgba(255, 255, 0, 1.0)";
+}
+
+function close_welcomeMessage(message) {
+    message.style.transitionDuration = '0.5s';
+    message.style.backgroundColor = "rgba(0, 0, 0, 0.0)";
+    message.style.color = "rgba(255, 255, 0, 0.0)";
+    sleep(message.style.transitionDuration / 2 * 1000).then(() => {
+        message.style.display = "none";
+        welcomeMessagePassed = true;
+    })
+}
+
 window.onclick = function (event) {
+    //welcomeMessage
+    if (!welcomeMessagePassed) {
+        if (progressionInt == -2) {
+            open_welcomeMessage(document.getElementById('welcomeMessage'));
+            progressionInt++; //to -1
+        }
+        else if (progressionInt == -1) {
+            close_welcomeMessage(document.getElementById('welcomeMessage'));
+            progressionInt++; //to 0;
+        }
+    }
+
     //display first box
-    if (progressionInt == 0) {
-        progressionInt++;
-        close_introMessage();
+    if (progressionInt == 0 && welcomeMessagePassed) {
+        progressionInt++; //to 1 for box1
+        highlight_box(document.getElementById("box1"), unlockedOpacity);
     }
 
     //closing popUp when clicking outside of it
@@ -113,7 +141,9 @@ window.onclick = function (event) {
 function close_PopUp() {
     if (displayed) {
         displayed = false;
+
         highlight_box(document.getElementById('box' + String(currentEpisodeInt)), unlockedOpacity);
+
         var popUp = document.getElementById('popUpBox');
         popUp.classList.toggle("openBox", false);
         popUp.classList.toggle("popUpBox", true);
