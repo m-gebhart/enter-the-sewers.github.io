@@ -101,6 +101,7 @@ function open_welcomeMessage(message) {
     message.style.display = "block";
     sleep(messageTransitionDuration / 2 * 1000).then(() => {
         message.style.transitionDuration = '0.5s';
+        message.style.width = '100%';
         message.style.backgroundColor = "rgba(0, 0, 0, 1.0)";
         message.style.color = "rgba(255, 255, 0, 1.0)";
     })
