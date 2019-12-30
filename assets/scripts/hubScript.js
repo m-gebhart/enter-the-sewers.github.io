@@ -2,6 +2,7 @@ var titles = ['ALL BY MYSELF', 'THE MAN IN THE PAINTING', 'SHEEP AMONG WOLVES'];
 var keywords = [['Abandonment', 'abandonment', 'I walk alone', 'i walk alone', 'I WALK ALONE'], ['Ghosts', 'ghosts'], ['Resistance', 'resistance']];
 
 var displayed = false;
+var inProcess = false;
 var progressionInt = 1;
 var currentEpisodeInt = 0;
 var animTimeFloat = 0.1;
@@ -30,7 +31,9 @@ function highlight_box(clickbox) {
 
 function create_episodePopUp(episodeInt)
 {
-    if (!displayed) {
+    if (!displayed && !inProcess) {
+        inProcess = true;
+
         //Getting references from box / index.html
         var popUp = document.getElementById('popUpBox');
         var popUpBG = document.getElementById('popUpBackground');
@@ -58,6 +61,7 @@ function create_episodePopUp(episodeInt)
                 popUpSearchBar.style.display = 'block';
                 popUpSearchBar.focus();
                 displayed = true;
+                inProcess = false;
             })
         })
     }
@@ -91,6 +95,11 @@ function check_Progression(event) {
 function check_Keyword(word) {
     if (word == 'example')
         progressionInt++;
+}
+
+window.onclick = function (event) {
+    if (event.target.nodeName == "IMG")
+        close_PopUp();
 }
 
 function close_PopUp() {
