@@ -64,18 +64,22 @@ body {
 }
 
 .welcomeMessage {
-    overflow: auto;
     display: none;
+    overflow: auto;
     position: fixed;
     top: -10vh;
     height: 100%;
-    width: 80%;
+    width: 100%;
     z-index: 3;
     padding-top: 15vh;
     padding-left: 5vw;
-    padding-right: 60%;
-    margin-right: 90%;
-    font-size: large;
     color: rgba(255, 255, 0, 0);
-    line-height: 150%;
+    line-height: 200%;
 }
+
+    .welcomeMessage pre {
+        padding-right: 10%;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-size: x-large;
+    }
