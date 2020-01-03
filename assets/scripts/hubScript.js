@@ -53,6 +53,7 @@ function close_welcomeMessage(message) {
     sleep(messageTransitionDuration * 1000).then(() => {
         message.style.display = "none";
         welcomeMessagePassed = true;
+        message.innerHTML = '';
     })
 }
 
