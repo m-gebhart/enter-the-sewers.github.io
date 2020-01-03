@@ -64,6 +64,7 @@ body {
 }
 
 .welcomeMessage {
+    overflow: auto;
     display: none;
     position: fixed;
     top: -10vh;
