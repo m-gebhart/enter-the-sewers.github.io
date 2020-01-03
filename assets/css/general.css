@@ -77,9 +77,10 @@ body {
     line-height: 200%;
 }
 
-    .welcomeMessage pre {
-        padding-right: 10%;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-        font-size: x-large;
-    }
+.welcomeMessage pre {
+    padding-right: 10%;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: x-large;
+    padding-bottom: 2vh;
+}
