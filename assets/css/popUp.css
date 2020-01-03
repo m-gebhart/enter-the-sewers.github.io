@@ -15,10 +15,10 @@
     background-color: black;
     display: block;
     position: fixed;
-    width: 5%;
+    width: 30%;
     height: 5%;
     z-index: 2;
-    top: -200px;
+    top: -800px;
     border: 2px solid white;
     border-radius: 5px;
 }
@@ -50,7 +50,6 @@
 
 .openBox {
     transition-duration: 1s;
-    transition-delay: 1s;
     transition-timing-function: ease;
     padding: 20px;
     top: 5%;
