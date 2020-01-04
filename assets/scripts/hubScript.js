@@ -4,7 +4,7 @@ var keywords = [['I walk alone', 'i walk alone', 'I WALK ALONE'], ['Ghosts', 'gh
 var displayed = false;
 var inProcess = false;
 var welcomeMessagePassed = false;
-var progressionInt = -1;
+var progressionInt = 0;
 var currentEpisodeInt = 0;
 var animTimeFloat = 0.05;
 var closePopUpAnimTime = 0.5;
@@ -16,15 +16,9 @@ var closeVar;
 var proceedVar;
 
 window.onclick = function (event) {
-    //welcomeMessage
-    if (!welcomeMessagePassed && progressionInt == -1) 
+    //start: clickAnywhere for welcomeMessage
+    if (!welcomeMessagePassed && progressionInt == 0) 
             open_welcomeMessage(document.getElementById('welcomeMessage'));
-
-    //displaying arrow to first box (station)
-    if (progressionInt == 0 && welcomeMessagePassed) {
-        progressionInt++; //to 1 for box1
-        unlock_arrow(1);
-    }
 
     //closing popUp when clicking outside of it
     if (displayed && (event.target.classList.contains("map") || event.target.classList.contains("underground_map")) || event.target.classList.contains("background"))
@@ -33,7 +27,7 @@ window.onclick = function (event) {
 
 function proceed() {
     close_welcomeMessage(document.getElementById('welcomeMessage'));
-    progressionInt = 0;
+    progressionInt = 1;
 }
 
 function open_welcomeMessage(message) {
@@ -54,6 +48,9 @@ function close_welcomeMessage(message) {
         message.style.display = "none";
         welcomeMessagePassed = true;
         message.innerHTML = '';
+
+        //unlocking episode 1
+        unlock_arrow(1);
     })
 }
 
@@ -121,7 +118,7 @@ function check_Keyword(event) {
                         sleep(closePopUpAnimTime * 1000).then(() => {
                             show_stationIcon(progressionInt);
                             sleep(closePopUpAnimTime * 1000).then(() => {
-                                progressionInt = 3;
+                                progressionInt = progressionInt + 2;
                                 unlock_arrow(progressionInt - 1);
                                 unlock_arrow(progressionInt);
                             })
@@ -135,7 +132,7 @@ function check_Keyword(event) {
                             show_stationIcon(progressionInt);
 
                             sleep(closePopUpAnimTime * 1000).then(() => {
-                                progressionInt = 4;
+                                progressionInt++;
                                 unlock_arrow(progressionInt);
                             })
                         })
