@@ -1,4 +1,4 @@
-var titles = ['ALL BY MYSELF', 'THE MAN IN THE PAINTING', 'SHEEP AMONG WOLVES'];
+var titles = ['Case A-02342', 'THE MAN IN THE PAINTING', 'SHEEP AMONG WOLVES'];
 var keywords = [['I walk alone', 'i walk alone', 'I WALK ALONE'], ['Ghosts', 'ghosts'], ['Ghosts', 'ghosts'], ['Resistance', 'resistance']];
 
 var displayed = false;
@@ -11,7 +11,7 @@ var closePopUpAnimTime = 0.5;
 var unlockedOpacity = 1.0;
 var clickedOpacity = 0.85;
 var messageTransitionDuration = "1s";
-var textDelay = 0.1;
+var textDelay = 1.5;
 var closeVar;
 var proceedVar;
 
@@ -32,6 +32,7 @@ function proceed() {
 
 function open_welcomeMessage(message) {
     proceedVar = document.getElementById("proceed");
+    document.getElementById("map").style.opacity = '0';
     load_welcomeTxtFile();
     message.style.transitionDuration = messageTransitionDuration;
     message.style.backgroundColor = "rgba(0, 0, 0, 1.0)";
@@ -44,6 +45,7 @@ function open_welcomeMessage(message) {
 function close_welcomeMessage(message) {
     message.style.backgroundColor = "rgba(0, 0, 0, 0.0)";
     message.style.color = "rgba(255, 255, 0, 0.0)";
+    document.getElementById("map").style.opacity = '1';
     sleep(messageTransitionDuration * 1000).then(() => {
         message.style.display = "none";
         welcomeMessagePassed = true;
@@ -90,15 +92,16 @@ function create_episodePopUp(episodeInt){
             closeVar.style.display = 'block';
             popUpHeader.innerHTML = titles[episodeInt - 1];
             popUpHeader.appendChild(closeVar);
-            load_txtFile(String(episodeInt), popUpBody);
-            sleep(animTimeFloat * 1000).then(() => {
+            popUpBody.opacity = "0";
+            popUpBody.transitionDuration= "0.5s";
+            sleep(textDelay * 1000).then(() => {
+                load_txtFile(String(episodeInt), popUpBody);
                 popUpBody.display = "block";
-                sleep(animTimeFloat*1000).then(() => {
-                    popUpSearchBar.style.display = 'block';
-                    popUpSearchBar.focus();
-                    displayed = true;
-                    inProcess = false;
-                })
+                popUpBody.opacity = "1";
+                popUpSearchBar.style.display = 'block';
+                popUpSearchBar.focus();
+                displayed = true;
+                inProcess = false;
             })
         })
     }

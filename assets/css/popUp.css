@@ -12,7 +12,7 @@
 
 .close {
     top: 0;
-    font-size: large;
+    font-size: xx-large;
     cursor: default;
     color: red;
     float: right;
@@ -20,12 +20,15 @@
 }
 
 .popUpBox .popUpHeader {
-    text-decoration: underline;
+    font-weight: bold;
+    font-size: larger;
     padding-left: 7%;
 }
 
 .popUpBox .popUpBody {
     padding: 7%;
+    line-height: 120%;
+    overflow: auto;
 }
 
 .popUpBox input[type=textField] {
