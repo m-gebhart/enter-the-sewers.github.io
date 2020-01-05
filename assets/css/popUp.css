@@ -8,6 +8,8 @@
     top: -800px;
     border: 2px solid white;
     border-radius: 5px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .close {
@@ -28,14 +30,15 @@
 .popUpBox .popUpBody {
     padding: 7%;
     line-height: 120%;
-    overflow: auto;
 }
 
 .popUpBox input[type=textField] {
     padding-left: 7%;
+    padding-bottom_ 7%;
     background-color: black;
     color: white;
     border: none;
+    margin-bottom: 5vh;
 }
 
 .openBox {
