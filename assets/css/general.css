@@ -11,7 +11,7 @@ body {
     z-index: 0;
 }
 
-a:visited {
+a, a:visited {
     color: #FFD800;
 }
 
