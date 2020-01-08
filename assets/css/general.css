@@ -11,6 +11,10 @@ body {
     z-index: 0;
 }
 
+a:visited {
+    color: #FFD800;
+}
+
 .welcomeMessage {
     display: none;
     overflow: auto;

@@ -1,4 +1,4 @@
-var titles = ['Case A-02342', 'THE MAN IN THE PAINTING', 'SHEEP AMONG WOLVES'];
+var titles = ['Case A-02342', 'END OF DEMO', 'END OF DEMO'];
 var keywords = [['I walk alone', 'i walk alone', 'I WALK ALONE'], ['Ghosts', 'ghosts'], ['Ghosts', 'ghosts'], ['Resistance', 'resistance']];
 
 var displayed = false;
@@ -21,7 +21,9 @@ window.onclick = function (event) {
             open_welcomeMessage(document.getElementById('welcomeMessage'));
 
     //closing popUp when clicking outside of it
-    if (displayed && (event.target.classList.contains("map") || event.target.classList.contains("underground_map")) || event.target.classList.contains("background"))
+    if (displayed && (event.target.classList.contains("map")
+        || event.target.classList.contains("underground_map"))
+        || event.target.classList.contains("background"))
         close_PopUp();
 }
 
@@ -99,12 +101,17 @@ function create_episodePopUp(episodeInt){
                 popUpBody.display = "block";
                 popUpBody.opacity = "1";
                 popUpSearchBar.style.display = 'block';
-                popUpSearchBar.focus();
+                putInFocus(popUpSearchBar);
                 displayed = true;
                 inProcess = false;
             })
         })
     }
+}
+
+function putInFocus(element) {
+    element.focus();
+    element.classList.toggle("textFieldInFocus", true);
 }
 
 function check_Keyword(event) {

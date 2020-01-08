@@ -34,11 +34,19 @@
 
 .popUpBox input[type=textField] {
     padding-left: 7%;
-    padding-bottom_ 7%;
+    padding-bottom: 7%;
     background-color: black;
-    color: white;
+    border-color: darkviolet;
+    border-width: 2px;
     border: none;
+    color: white;
     margin-bottom: 5vh;
+}
+
+.textFieldInFocus {
+    border-color: blue;
+    border-width: 4px;
+    border: solid;
 }
 
 .openBox {
