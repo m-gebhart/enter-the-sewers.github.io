@@ -1,5 +1,5 @@
 var titles = ['Case A-02342', 'END OF DEMO', 'END OF DEMO'];
-var keywords = [['i walk alone'], ['ghosts'], ['ghosts'], ['resistance']];
+var keywords = [['i walk alone'], ['ghosts'], ['resistance']];
 
 var displayed = false;
 var inProcess = false;
@@ -9,7 +9,7 @@ var currentEpisodeInt = 0;
 var animTimeFloat = 0.05;
 var closePopUpAnimTime = 0.5;
 var unlockedOpacity = 1.0;
-var clickedOpacity = 0.85;
+var clickedOpacity = 0.7;
 var messageTransitionDuration = "1s";
 var textDelay = 1.5;
 var closeVar;
@@ -92,16 +92,16 @@ function create_episodePopUp(episodeInt){
         //filling the box with content (one after one)
         sleep(animTimeFloat * 1000).then(() => {
             closeVar.style.display = 'block';
+            popUpBody.display = "block";
+            popUpSearchBar.style.display = 'block';
             popUpHeader.innerHTML = titles[episodeInt - 1];
             popUpHeader.appendChild(closeVar);
-            popUpBody.opacity = "0";
-            popUpBody.transitionDuration= "0.5s";
             sleep(textDelay * 1000).then(() => {
                 load_txtFile(String(episodeInt), popUpBody);
-                popUpBody.display = "block";
-                popUpBody.opacity = "1";
-                popUpSearchBar.style.display = 'block';
-                putInFocus(popUpSearchBar);
+                popUpHeader.style.opacity = "1";
+                popUpBody.style.opacity = "1";
+                popUpSearchBar.style.opacity = "1";
+                put_inFocus(popUpSearchBar);
                 displayed = true;
                 inProcess = false;
             })
@@ -109,7 +109,8 @@ function create_episodePopUp(episodeInt){
     }
 }
 
-function putInFocus(element) {
+
+function put_inFocus(element) {
     element.focus();
     element.classList.toggle("textFieldInFocus", true);
 }
@@ -120,9 +121,9 @@ function check_Keyword(event) {
         for (var i = 0; i < keywords[currentEpisodeInt - 1].length; i++)
             if (keywords[currentEpisodeInt - 1][i] == input) {
                 change_map();
+                fade_arrow(currentEpisodeInt);
                 sleep(closePopUpAnimTime * 1000).then(() => {
                     close_PopUp();
-
                     //unlocking next station (unlocking next arrow showing last station icon)
                     if (progressionInt == currentEpisodeInt) {
                         sleep(closePopUpAnimTime * 1000).then(() => {
@@ -145,7 +146,6 @@ function unlock_arrow(arrowInt) {
 
 function show_stationIcon(stationInt) {
     highlight_element(document.getElementById("box" + String(stationInt)), unlockedOpacity);
-    fade_arrow(stationInt);
 }
 
 function fade_arrow(arrowInt) {
@@ -166,11 +166,18 @@ function close_PopUp() {
     }
 }
 
+//to-do: opacity for reopening an episode!
+
 function empty_innerHTML() {
-    document.getElementById('popUpSearchBar').style.display = 'none';
-    document.getElementById('popUpSearchBar').value = '';
-    document.getElementById('popUpBody').innerHTML = '';
-    document.getElementById('popUpBody').display = 'none';
+    var searchBar = document.getElementById('popUpSearchBar');
+    searchBar.style.display = 'none';
+    searchBar.value = '';
+    searchBar.style.opacity = '0';
+
+    var popUpBody = document.getElementById('popUpBody');
+    popUpBody.display = 'none';
+    popUpBody.innerHTML = '';
+    popUpBody.style.opacity = '0';
 }
 
 function load_txtFile(episodeStr, target) {

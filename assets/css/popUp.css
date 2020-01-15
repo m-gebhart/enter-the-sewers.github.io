@@ -10,6 +10,7 @@
     border-radius: 5px;
     overflow-y: auto;
     overflow-x: hidden;
+    line-height: 120%;
 }
 
 .close {
@@ -23,30 +24,37 @@
 
 .popUpBox .popUpHeader {
     font-weight: bold;
-    font-size: larger;
-    padding-left: 7%;
+    font-size: x-large;
+    margin-top: 2%;
+    margin-left: 7%;
+    opacity: 0;
+    transition-duration: 1s;
 }
 
 .popUpBox .popUpBody {
-    padding: 7%;
+    padding-bottom: 3%;
+    padding-top: 4%;
+    margin-left: 7%;
     line-height: 120%;
+    opacity: 0;
+    transition-duration: 1s;
 }
 
 .popUpBox input[type=textField] {
-    padding-left: 7%;
-    padding-bottom: 7%;
+    margin-left: 7%;
+    padding: 1%;
     background-color: black;
-    border-color: darkviolet;
-    border-width: 2px;
-    border: none;
+    border-color: darkblue !important;
+    border-width: 1px !important;
     color: white;
-    margin-bottom: 5vh;
+    margin-bottom: 10vh;
+    margin-left: 7%;
+    opacity: 0;
+    transition-duration: 1s;
 }
 
-.textFieldInFocus {
-    border-color: blue;
-    border-width: 4px;
-    border: solid;
+.popUpBox input[type=textField]:focus {
+    border: none;
 }
 
 .openBox {
