@@ -2,16 +2,18 @@ body {
     color: white;
     font-family: 'Segoe UI Light', Geneva, Verdana, sans-serif;
     background-color: black;
-    overflow: auto;
 }
 
 .background {
-    width: 99%;
-    height: 99%;
+    width: 100%;
+    height: 100%;
     z-index: 0;
+    position: fixed;
+    left: 0;
+    overflow: auto;
 }
 
-a, a:visited {
+a:visited {
     color: #FFD800;
 }
 
@@ -53,80 +55,66 @@ a, a:visited {
 }
 
 .underground_map {
+    display: block;
     position: relative;
-    top: 5vh;
     z-index: 0;
-    margin-left: auto;
-    margin-right: auto;
-    right: 75%;
+    width: 80%;
+    height: 80%;
+    margin: auto;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
-.underground_map img {
+.map_img {
     position: absolute;
-    height: 563px;
-    overflow-y: scroll;
+    width: 50rem;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.underground_map .clickbox {
-    position: absolute;
-    opacity: 0;
-    height: 100px;
-    width: 100px;
-    z-index: 1;
-}
-
-.underground_map .one {
-    top: 225px;
-    left: 270px;
-}
-
-.underground_map .two {
-    top: 120px;
-    left: 520px;
-}
-
-.underground_map .three {
-    top: 210px;
-    left: 560px;
-}
-
-.underground_map .four {
-    top: 440px;
-    left: 630px;
-}
-
-.underground_map {
-    position: absolute;
-    opacity: 1;
-    height: 80px;
-    width: 80px;
-    z-index: 1;
-}
-
-.underground_map .arrow{
+.clickbox {
     position: absolute;
     opacity: 0;
-    height: 80px;
-    width: 80px;
+    height: 6rem;
+    width: 6rem;
     z-index: 1;
 }
 
-.underground_map .i {
-    top: 290px;
-    left: 260px;
+.one {
+    top: -3rem;
+    left: 18rem;
 }
 
-.underground_map .ii {
-    top: 80px;
-    left: 490px;
+.two {
+    top: -10rem;
+    left: 32.5rem;
 }
 
-.underground_map .iii {
-    top: 165px;
-    left: 635px;
+.three {
+    top: 10rem;
+    left: 38rem;
 }
 
-.underground_map .iv {
-    top: 375px;
-    left: 670px;
+.arrow {
+    position: absolute;
+    opacity: 0;
+    height: 6rem;
+    width: 6rem;
+    z-index: 1;
+}
+
+.i {
+    top: 0.25rem;
+    left: 15.5rem;
+}
+
+.ii {
+    top: -13.75rem;
+    left: 36.75rem;
+}
+
+.iii {
+    top: 5.5rem;
+    left: 41.5rem;
 }

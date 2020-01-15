@@ -1,5 +1,5 @@
 var titles = ['Case A-02342', 'END OF DEMO', 'END OF DEMO'];
-var keywords = [['I walk alone', 'i walk alone', 'I WALK ALONE'], ['Ghosts', 'ghosts'], ['Ghosts', 'ghosts'], ['Resistance', 'resistance']];
+var keywords = [['i walk alone'], ['ghosts'], ['ghosts'], ['resistance']];
 
 var displayed = false;
 var inProcess = false;
@@ -116,40 +116,15 @@ function putInFocus(element) {
 
 function check_Keyword(event) {
     if (event.keyCode == 13) {
-        var solution = document.getElementById('popUpSearchBar').value;
-        for (var i = 0; i < keywords[currentEpisodeInt-1].length; i++)
-            if (keywords[currentEpisodeInt-1][i] == solution) {
+        var input = document.getElementById('popUpSearchBar').value.toLowerCase();
+        for (var i = 0; i < keywords[currentEpisodeInt - 1].length; i++)
+            if (keywords[currentEpisodeInt - 1][i] == input) {
                 change_map();
                 sleep(closePopUpAnimTime * 1000).then(() => {
                     close_PopUp();
 
-                    //case: episode 1 unlocking 2 and 3
-                    if (progressionInt == 1 && currentEpisodeInt == 1) {
-                        sleep(closePopUpAnimTime * 1000).then(() => {
-                            show_stationIcon(progressionInt);
-                            sleep(closePopUpAnimTime * 1000).then(() => {
-                                progressionInt = progressionInt + 2;
-                                unlock_arrow(progressionInt - 1);
-                                unlock_arrow(progressionInt);
-                            })
-                        })
-                    }
-
-                    //case: episode 2 or 3 unlocking 4
-                    else if (progressionInt == 3 && (currentEpisodeInt == 2 || currentEpisodeInt == 3)) {
-                        sleep(closePopUpAnimTime * 1000).then(() => {
-                            show_stationIcon(progressionInt - 1);
-                            show_stationIcon(progressionInt);
-
-                            sleep(closePopUpAnimTime * 1000).then(() => {
-                                progressionInt++;
-                                unlock_arrow(progressionInt);
-                            })
-                        })
-                    }
-
-                    //general case: unlocking next station (unlocking next arrow showing last station icon)
-                    else if (progressionInt == currentEpisodeInt) {
+                    //unlocking next station (unlocking next arrow showing last station icon)
+                    if (progressionInt == currentEpisodeInt) {
                         sleep(closePopUpAnimTime * 1000).then(() => {
                             show_stationIcon(progressionInt);
                             sleep(closePopUpAnimTime * 1000).then(() => {

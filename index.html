@@ -6,14 +6,16 @@
     <title>Enter The Sewers</title>
     <link rel="icon" href="assets/images/pageIcon.png">
     <link rel="stylesheet" type="text/css" href="assets/css/styles.css">    
-    <link type="application/atom+xml" rel="alternate" href="/feed.xml" />
+    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" />
     <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Enter The Sewers</title>
 <meta name="generator" content="Jekyll v3.8.5" />
 <meta property="og:title" content="Enter The Sewers" />
 <meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/" />
+<meta property="og:url" content="http://localhost:4000/" />
 <script type="application/ld+json">
-{"headline":"Enter The Sewers","@type":"WebSite","url":"/","@context":"https://schema.org"}</script>
+{"headline":"Enter The Sewers","@type":"WebSite","url":"http://localhost:4000/","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 </head>
@@ -25,22 +27,22 @@
 		<p class="proceed" id="proceed" onclick="proceed()">PROCEED</p>
 	</div>
 	<div class="underground_map">
-		<img src="assets/images/map1.png" id="map" class="map" />
-		<img src="assets/images/icon1.png" class="clickbox one" id="box1" alt="" onclick="open_PopUp(1)" />
-		<img src="assets/images/arrow1.png" class="arrow i" id="arrow1" />
-		<img src="assets/images/icon2.png" class="clickbox two" id="box2" alt="" onclick="open_PopUp(2)" />
-		<img src="assets/images/arrow2.png" class="arrow ii" id="arrow2" />
-		<img src="assets/images/icon3.png" class="clickbox three" id="box3" alt="" onclick="open_PopUp(3)" />
-		<img src="assets/images/arrow3.png" class="arrow iii" id="arrow3" />
-		<img src="assets/images/icon4.png" class="clickbox four" id="box4" alt="" onclick="open_PopUp(4)" />
-		<img src="assets/images/arrow4.png" class="arrow iv" id="arrow4" />
-		<div class="popUpBox" id="popUpBox">
-			<div class="popUpHeader" id="popUpHeader">
-				<div class="close" id="close" onclick="close_PopUp()">&times;</div>
-			</div>
-			<div class="popUpBody" id="popUpBody"></div>
-			<input type="textField" id="popUpSearchBar" placeholder="???" onkeypress="check_Keyword(event)" />
+		<img src="assets/images/map1.png" id="map" class="map_img" />
+		<div class="map_img">
+			<img src="assets/images/icon1.png" class="clickbox one" id="box1" alt="" onclick="open_PopUp(1)" />
+			<img src="assets/images/arrow1.png" class="arrow i" id="arrow1" />
+			<img src="assets/images/icon2.png" class="clickbox two" id="box2" alt="" onclick="open_PopUp(2)" />
+			<img src="assets/images/arrow3.png" class="arrow ii" id="arrow2" />
+			<img src="assets/images/icon3.png" class="clickbox three" id="box3" alt="" onclick="open_PopUp(3)" />
+			<img src="assets/images/arrow4.png" class="arrow iii" id="arrow3" />
 		</div>
+	</div>
+	<div class="popUpBox" id="popUpBox">
+		<div class="popUpHeader" id="popUpHeader">
+			<div class="close" id="close" onclick="close_PopUp()">&times;</div>
+		</div>
+		<div class="popUpBody" id="popUpBody"></div>
+		<input type="textField" id="popUpSearchBar" placeholder="???" onkeypress="check_Keyword(event)" />
 	</div>
 </div>
 
