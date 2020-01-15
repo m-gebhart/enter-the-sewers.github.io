@@ -14,6 +14,7 @@ var messageTransitionDuration = "1s";
 var textDelay = 1.5;
 var closeVar;
 var proceedVar;
+var popUpOpacity = 1;
 
 window.onclick = function (event) {
     //start: clickAnywhere for welcomeMessage
@@ -27,11 +28,7 @@ window.onclick = function (event) {
         close_PopUp();
 }
 
-function proceed() {
-    close_welcomeMessage(document.getElementById('welcomeMessage'));
-    progressionInt = 1;
-}
-
+//open welcomeMessage after clicking anywhere
 function open_welcomeMessage(message) {
     proceedVar = document.getElementById("proceed");
     document.getElementById("map").style.opacity = '0';
@@ -42,6 +39,11 @@ function open_welcomeMessage(message) {
         message.style.display = "block";
         message.style.color = "rgba(255, 255, 0, 1.0)";
     })
+}
+
+function proceed() {
+    close_welcomeMessage(document.getElementById('welcomeMessage'));
+    progressionInt = 1;
 }
 
 function close_welcomeMessage(message) {
@@ -89,6 +91,19 @@ function create_episodePopUp(episodeInt){
         popUp.style.display = 'block';
         popUp.classList.toggle("openBox", true);
 
+        //Checking, whether case is already solved
+        if (progressionInt > episodeInt) {
+            popUpOpacity = 0.7;
+            popUpSearchBar.style.pointerEvents = "none";
+            popUpBody.style.pointerEvents = "none";
+            sleep((textDelay + animTimeFloat) * 1500).then(() => {
+                document.getElementById("stamp").style.opacity = '1';
+            })
+        }
+        else {
+            popUpOpacity = 1;
+        }
+
         //filling the box with content (one after one)
         sleep(animTimeFloat * 1000).then(() => {
             closeVar.style.display = 'block';
@@ -98,10 +113,11 @@ function create_episodePopUp(episodeInt){
             popUpHeader.appendChild(closeVar);
             sleep(textDelay * 1000).then(() => {
                 load_txtFile(String(episodeInt), popUpBody);
-                popUpHeader.style.opacity = "1";
-                popUpBody.style.opacity = "1";
-                popUpSearchBar.style.opacity = "1";
-                put_inFocus(popUpSearchBar);
+                popUpHeader.style.opacity = String(popUpOpacity);
+                popUpBody.style.opacity = String(popUpOpacity);
+                popUpSearchBar.style.opacity = String(popUpOpacity);
+                if (progressionInt <= episodeInt)
+                    put_inFocus(popUpSearchBar);
                 displayed = true;
                 inProcess = false;
             })
@@ -115,6 +131,7 @@ function put_inFocus(element) {
     element.classList.toggle("textFieldInFocus", true);
 }
 
+//checking whether input from popUp's textfield is a valid keyword
 function check_Keyword(event) {
     if (event.keyCode == 13) {
         var input = document.getElementById('popUpSearchBar').value.toLowerCase();
@@ -139,11 +156,12 @@ function check_Keyword(event) {
     }
 }
 
-
+//displaying arrow pointing at station on map
 function unlock_arrow(arrowInt) {
     highlight_element(document.getElementById("arrow" + String(arrowInt)), unlockedOpacity);
 }
 
+//displaying station icon as solved episode on map
 function show_stationIcon(stationInt) {
     highlight_element(document.getElementById("box" + String(stationInt)), unlockedOpacity);
 }
@@ -152,6 +170,7 @@ function fade_arrow(arrowInt) {
     highlight_element(document.getElementById("arrow" + String(arrowInt)), clickedOpacity);
 }
 
+//map decays after each solved episode
 function change_map() {
     document.getElementById("map").src = "assets/images/map" + String(progressionInt+1)+".png";
 }
@@ -166,8 +185,6 @@ function close_PopUp() {
     }
 }
 
-//to-do: opacity for reopening an episode!
-
 function empty_innerHTML() {
     var searchBar = document.getElementById('popUpSearchBar');
     searchBar.style.display = 'none';
@@ -178,27 +195,30 @@ function empty_innerHTML() {
     popUpBody.display = 'none';
     popUpBody.innerHTML = '';
     popUpBody.style.opacity = '0';
+
+    document.getElementById('popUpHeader').style.opacity = '0';
+    document.getElementById("stamp").style.opacity = '0';
 }
 
+//loading txtFile for popUp-Content
 function load_txtFile(episodeStr, target) {
     var txtFile = new XMLHttpRequest();
     txtFile.open("GET", "assets/txt/episode" + episodeStr + ".txt", true);
     txtFile.onreadystatechange = function () {
-        if (txtFile.readyState === 4 && txtFile.status == 200) {
+        if (txtFile.readyState === 4 && txtFile.status == 200)
             content = txtFile.responseText;
-        }
         target.innerHTML = content;
     }
     txtFile.send(null);
 }
 
+//loading welcome Message after clicking anywhere
 function load_welcomeTxtFile() {
     var txtFile = new XMLHttpRequest();
     txtFile.open("GET", "assets/txt/welcomeMessage.txt", true);
     txtFile.onreadystatechange = function () {
-        if (txtFile.readyState === 4 && txtFile.status == 200) {
+        if (txtFile.readyState === 4 && txtFile.status == 200)
             content = txtFile.responseText;
-        }
         document.getElementById("welcomeMessage").innerHTML = content;
         document.getElementById("welcomeMessage").appendChild(proceedVar);
     }
