@@ -93,16 +93,15 @@ function create_episodePopUp(episodeInt){
 
         //Checking, whether case is already solved
         if (progressionInt > episodeInt) {
-            popUpOpacity = 0.7;
+            popUpOpacity = 0.5;
             popUpSearchBar.style.pointerEvents = "none";
             popUpBody.style.pointerEvents = "none";
             sleep((textDelay + animTimeFloat) * 1500).then(() => {
                 document.getElementById("stamp").style.opacity = '1';
             })
         }
-        else {
+        else 
             popUpOpacity = 1;
-        }
 
         //filling the box with content (one after one)
         sleep(animTimeFloat * 1000).then(() => {
