@@ -1,5 +1,5 @@
 var titles = ['Case A-02342', 'END OF DEMO', 'END OF DEMO'];
-var keywords = [['i walk alone'], ['ghosts'], ['resistance']];
+var encrypts = [['iu^hfZdfdZiuZcg#jHGg!'], ['ggmppnjacbdn'], ['rdqfoo[g[\\f\o#hcgjZGf']];
 
 var displayed = false;
 var inProcess = false;
@@ -44,6 +44,11 @@ function open_welcomeMessage(message) {
 function proceed() {
     close_welcomeMessage(document.getElementById('welcomeMessage'));
     progressionInt = 1;
+}
+
+window.onkeypress = function(event) {
+    if (event.keyCode == 13 && progressionInt == 0)
+        proceed();
 }
 
 function close_welcomeMessage(message) {
@@ -134,8 +139,8 @@ function put_inFocus(element) {
 function check_Keyword(event) {
     if (event.keyCode == 13) {
         var input = document.getElementById('popUpSearchBar').value.toLowerCase();
-        for (var i = 0; i < keywords[currentEpisodeInt - 1].length; i++)
-            if (keywords[currentEpisodeInt - 1][i] == input) {
+        for (var i = 0; i < encrypts[currentEpisodeInt - 1].length; i++)
+            if (input == decrypt_fromKey(encrypts[currentEpisodeInt - 1][i], parseInt(String(new Date().getFullYear()).charAt(0)))) {
                 change_map();
                 fade_arrow(currentEpisodeInt);
                 sleep(closePopUpAnimTime * 1000).then(() => {
@@ -145,8 +150,7 @@ function check_Keyword(event) {
                         sleep(closePopUpAnimTime * 1000).then(() => {
                             show_stationIcon(progressionInt);
                             sleep(closePopUpAnimTime * 1000).then(() => {
-                                progressionInt++;
-                                unlock_arrow(progressionInt);
+                                 unlock_nextEpisode();
                             })
                         })
                     }
@@ -154,17 +158,27 @@ function check_Keyword(event) {
             }
     }
 }
+      
+function unlock_nextEpisode() {
+      progressionInt++;
+      unlock_arrow(progressionInt);
+}
 
 //displaying arrow pointing at station on map
 function unlock_arrow(arrowInt) {
-    highlight_element(document.getElementById("arrow" + String(arrowInt)), unlockedOpacity);
+    var arrowIcon = document.getElementById("arrow" + String(arrowInt));
+    arrowIcon.src = "assets/images/arrow" + String(arrowInt)+ ".png";
+    highlight_element(arrowIcon, unlockedOpacity);
 }
 
 //displaying station icon as solved episode on map
 function show_stationIcon(stationInt) {
-    highlight_element(document.getElementById("box" + String(stationInt)), unlockedOpacity);
+    var stationIcon = document.getElementById("box" + String(stationInt));
+    stationIcon.src = "assets/images/icon" + String(stationInt)+ ".png";
+    highlight_element(stationIcon, unlockedOpacity);
 }
 
+//lowering opacity of arrow after solved episode
 function fade_arrow(arrowInt) {
     highlight_element(document.getElementById("arrow" + String(arrowInt)), clickedOpacity);
 }
@@ -226,4 +240,13 @@ function load_welcomeTxtFile() {
 
 const sleep = (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms))
+}
+
+//decryption to make keywords less visible by Web Inspector, encrypt()-function on Spaces
+function decrypt_fromKey(encrypt, key) {
+    var decryption = '';
+    for (var i = 0; i < encrypt.length / key; i++) {
+        decryption += String.fromCharCode(encrypt.charCodeAt(i) + i);
+    }
+    return decryption;
 }
