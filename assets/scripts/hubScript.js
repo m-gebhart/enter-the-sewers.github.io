@@ -168,14 +168,18 @@ function unlock_nextEpisode() {
 function unlock_arrow(arrowInt) {
     var arrowIcon = document.getElementById("arrow" + String(arrowInt));
     arrowIcon.src = "assets/images/arrow" + String(arrowInt)+ ".png";
-    highlight_element(arrowIcon, unlockedOpacity);
+    sleep(500).then(() => {
+        highlight_element(arrowIcon, unlockedOpacity);
+    })
 }
 
 //displaying station icon as solved episode on map
 function show_stationIcon(stationInt) {
     var stationIcon = document.getElementById("box" + String(stationInt));
     stationIcon.src = "assets/images/icon" + String(stationInt)+ ".png";
-    highlight_element(stationIcon, unlockedOpacity);
+    sleep(500).then(() => {
+        highlight_element(stationIcon, unlockedOpacity);
+    })
 }
 
 //lowering opacity of arrow after solved episode
