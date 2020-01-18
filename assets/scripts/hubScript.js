@@ -166,20 +166,12 @@ function unlock_nextEpisode() {
 
 //displaying arrow pointing at station on map
 function unlock_arrow(arrowInt) {
-    var arrowIcon = document.getElementById("arrow" + String(arrowInt));
-    arrowIcon.src = "assets/images/arrow" + String(arrowInt)+ ".png";
-    sleep(500).then(() => {
-        highlight_element(arrowIcon, unlockedOpacity);
-    })
+    highlight_element(document.getElementById("arrow" + String(arrowInt)), unlockedOpacity);
 }
 
 //displaying station icon as solved episode on map
 function show_stationIcon(stationInt) {
-    var stationIcon = document.getElementById("box" + String(stationInt));
-    stationIcon.src = "assets/images/icon" + String(stationInt)+ ".png";
-    sleep(500).then(() => {
-        highlight_element(stationIcon, unlockedOpacity);
-    })
+    highlight_element(document.getElementById("box" + String(stationInt)), unlockedOpacity);
 }
 
 //lowering opacity of arrow after solved episode

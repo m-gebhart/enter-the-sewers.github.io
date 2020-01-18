@@ -35,9 +35,11 @@
     padding-bottom: 3%;
     padding-top: 4%;
     margin-left: 7%;
-    line-height: 120%;
+    margin-right: 12vw;
+    line-height: 140%;
     opacity: 0;
     transition-duration: 1s;
+    text-align: justify;
 }
 
 .popUpBox input[type=textField] {

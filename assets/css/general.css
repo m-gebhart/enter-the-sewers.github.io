@@ -32,7 +32,8 @@ a:visited {
 }
 
 .welcomeMessage pre {
-    padding-right: 10%;
+    padding-right: 15%;
+    padding-left: 13%;
     white-space: pre-wrap;
     word-wrap: break-word;
     font-size: large;
@@ -51,7 +52,7 @@ a:visited {
     height: 30px;
     text-align: center;
     margin-bottom: 85px;
-    margin-left: 80px;
+    margin-left: 13%;
 }
 
 .underground_map {
