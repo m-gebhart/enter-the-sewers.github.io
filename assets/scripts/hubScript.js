@@ -101,8 +101,10 @@ function create_episodePopUp(episodeInt){
             popUpOpacity = 0.5;
             popUpSearchBar.style.pointerEvents = "none";
             popUpBody.style.pointerEvents = "none";
+            var stamp = document.getElementById("stamp");
+            stamp.style.zIndex = '3';
             sleep((textDelay + animTimeFloat) * 1500).then(() => {
-                document.getElementById("stamp").style.opacity = '1';
+                stamp.style.opacity = '1';
             })
         }
         else 
