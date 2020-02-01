@@ -98,7 +98,7 @@ function create_episodePopUp(episodeInt){
 
         //Checking, whether case is already solved
         if (progressionInt > episodeInt) {
-            popUpOpacity = 0.5;
+            popUpOpacity = 0.4;
             popUpSearchBar.style.pointerEvents = "none";
             popUpBody.style.pointerEvents = "none";
             var stamp = document.getElementById("stamp");
@@ -107,8 +107,11 @@ function create_episodePopUp(episodeInt){
                 stamp.style.opacity = '1';
             })
         }
-        else 
-            popUpOpacity = 1;
+      else {	
+      	    popUpOpacity = 1;
+      	    popUpSearchBar.style.pointerEvents = "unset";
+            popUpBody.style.pointerEvents = "unset";
+    	}
 
         //filling the box with content (one after one)
         sleep(animTimeFloat * 1000).then(() => {
