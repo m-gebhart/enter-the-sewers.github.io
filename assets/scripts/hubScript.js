@@ -1,5 +1,5 @@
-var titles = ['Case A-02342', 'END OF DEMO', 'END OF DEMO'];
-var encrypts = [['iu^hfZdfdZiuZcg#jHGg!'], ['ggmppnjacbdn'], ['rdqfoo[g[\\f\o#hcgjZGf']];
+var titles = ['Case A-02342', 'Case B-03945', 'Case C-03120'];
+var encrypts = [['iu^hfZdfdZiuZcg#jHGg!'], ['hdpj]ihcc[^gghdpj]ihcc[^gg'], ['rdqfoo[g[\\f\o#hcgjZGf']];
 
 var displayed = false;
 var inProcess = false;
@@ -23,8 +23,8 @@ window.onclick = function (event) {
 
     //closing popUp when clicking outside of it
     if (displayed && (event.target.classList.contains("map")
-        || event.target.classList.contains("underground_map"))
-        || event.target.classList.contains("background"))
+        || event.target.classList.contains("underground_map")
+        || event.target.classList.contains("background")))
         close_PopUp();
 }
 
