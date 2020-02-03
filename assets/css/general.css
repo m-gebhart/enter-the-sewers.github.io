@@ -70,7 +70,7 @@ a:visited {
     .underground_map {
         top: 10%;
         left: 20%;
-        transform: translate(0);
+        transform: translate(10%);
     }
 }
 
