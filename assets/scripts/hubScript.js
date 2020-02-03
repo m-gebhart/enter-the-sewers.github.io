@@ -36,7 +36,9 @@ function open_welcomeMessage() {
 }
 
 function open_exitMessage() {
-    open_screenMessage(false);
+    sleep(1000).then(() => {
+        open_screenMessage(false);
+    });
 }
 
 //full-screen Message for opening and ending
