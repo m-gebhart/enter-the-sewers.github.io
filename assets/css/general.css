@@ -66,6 +66,14 @@ a:visited {
     transform: translateY(-50%);
 }
 
+@media only screen and (max-width: 600px) {
+    .underground_map {
+        top: 10%;
+        left: 20%;
+        transform: translate(0);
+    }
+}
+
 .map_img {
     position: absolute;
     width: 50rem;
