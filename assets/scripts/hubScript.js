@@ -34,7 +34,7 @@ function open_welcomeMessage(message) {
     load_txtMessage("welcomeMessage.txt");
     message.style.transitionDuration = messageTransitionDuration;
     message.style.backgroundColor = "rgba(0, 0, 0, 1.0)";
-    sleep(messageTransitionDuration * 1000).then(() => {
+    sleep(400).then(() => {
         message.style.display = "block";
         message.style.color = "rgba(255, 255, 0, 1.0)";
     });
@@ -182,7 +182,7 @@ function open_exitMessage(message) {
     proceedVar.innerHTML = "BACK TO MAP";
     proceedVar.style.color = '#FFD800';
     proceedVar.style.borderColor = '#FFD800';
-    sleep((3500).then(() => {
+    sleep(3500).then(() => {
         message.style.display = "block";
         message.style.color = "rgba(255, 255, 0, 1.0)";
     });
