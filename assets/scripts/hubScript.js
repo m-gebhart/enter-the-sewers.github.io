@@ -56,7 +56,7 @@ function close_screenMessage(message) {
     message.style.backgroundColor = "rgba(0, 0, 0, 0.0)";
     message.style.color = "rgba(255, 255, 0, 0.0)";
     document.getElementById("map").style.opacity = '1';
-    sleep(messageTransitionDuration * 1000).then(() => {
+    sleep(1000).then(() => {
         message.removeChild(proceedVar);
         message.style.display = "none";
         welcomeMessagePassed = true;
@@ -182,7 +182,7 @@ function open_exitMessage(message) {
     proceedVar.innerHTML = "BACK TO MAP";
     proceedVar.style.color = '#FFD800';
     proceedVar.style.borderColor = '#FFD800';
-    sleep((messageTransitionDuration * 2000) + 1500).then(() => {
+    sleep((3500).then(() => {
         message.style.display = "block";
         message.style.color = "rgba(255, 255, 0, 1.0)";
     });
