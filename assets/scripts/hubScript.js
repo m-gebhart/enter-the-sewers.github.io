@@ -1,5 +1,4 @@
 var titles = ['Case A-02342', 'Case B-03945', 'Case C-03120'];
-var encrypts = [['iu^hfZdfdZiuZcg#jHGg!'], ['hdpj]ihcc[^gghdpj]ihcc[^gg'], ['rdqfoo[g[\\f\o#hcgjZGf']];
 
 var displayed = false;
 var inProcess = false;
@@ -18,8 +17,8 @@ var popUpOpacity = 1;
 
 window.onclick = function (event) {
     //start: clickAnywhere for welcomeMessage
-    if (!welcomeMessagePassed && progressionInt == 0) 
-            open_welcomeMessage(document.getElementById('welcomeMessage'));
+    if (!welcomeMessagePassed && progressionInt == 0)
+        open_welcomeMessage(document.getElementById('screenMessage'));
 
     //closing popUp when clicking outside of it
     if (displayed && (event.target.classList.contains("map")
@@ -32,18 +31,19 @@ window.onclick = function (event) {
 function open_welcomeMessage(message) {
     proceedVar = document.getElementById("proceed");
     document.getElementById("map").style.opacity = '0';
-    load_welcomeTxtFile();
+    load_txtMessage("welcomeMessage.txt");
     message.style.transitionDuration = messageTransitionDuration;
     message.style.backgroundColor = "rgba(0, 0, 0, 1.0)";
     sleep(messageTransitionDuration * 1000).then(() => {
         message.style.display = "block";
         message.style.color = "rgba(255, 255, 0, 1.0)";
-    })
+    });
 }
 
 function proceed() {
-    close_welcomeMessage(document.getElementById('welcomeMessage'));
-    progressionInt = 1;
+    close_screenMessage();
+    if (progressionInt < 1)
+        progressionInt = 1;
 }
 
 window.onkeypress = function(event) {
@@ -51,18 +51,20 @@ window.onkeypress = function(event) {
         proceed();
 }
 
-function close_welcomeMessage(message) {
+function close_screenMessage(message) {
+    var message = document.getElementById('screenMessage');
     message.style.backgroundColor = "rgba(0, 0, 0, 0.0)";
     message.style.color = "rgba(255, 255, 0, 0.0)";
     document.getElementById("map").style.opacity = '1';
     sleep(messageTransitionDuration * 1000).then(() => {
+        message.removeChild(proceedVar);
         message.style.display = "none";
         welcomeMessagePassed = true;
         message.innerHTML = '';
 
         //unlocking episode 1
         unlock_arrow(1);
-    })
+    });
 }
 
 function highlight_element(element, opacityFloat) {
@@ -105,7 +107,7 @@ function create_episodePopUp(episodeInt){
             stamp.style.zIndex = '3';
             sleep((textDelay + animTimeFloat) * 1500).then(() => {
                 stamp.style.opacity = '1';
-            })
+            });
         }
       else {	
       	    popUpOpacity = 1;
@@ -129,8 +131,8 @@ function create_episodePopUp(episodeInt){
                     put_inFocus(popUpSearchBar);
                 displayed = true;
                 inProcess = false;
-            })
-        })
+            });
+        });
     }
 }
 
@@ -155,18 +157,35 @@ function check_Keyword(event) {
                         sleep(closePopUpAnimTime * 1000).then(() => {
                             show_stationIcon(progressionInt);
                             sleep(closePopUpAnimTime * 1000).then(() => {
-                                 unlock_nextEpisode();
-                            })
-                        })
+                                unlock_nextEpisode();
+                            });
+                        });
                     }
-                })
+                });
             }
     }
 }
       
 function unlock_nextEpisode() {
-      progressionInt++;
-      unlock_arrow(progressionInt);
+    progressionInt++;
+    if (progressionInt < 4)
+        unlock_arrow(progressionInt);
+    else
+        open_exitMessage(document.getElementById('screenMessage'));
+}
+
+function open_exitMessage(message) {
+    document.getElementById("map").style.opacity = '0';
+    load_txtMessage("exitMessage.txt");
+    message.style.transitionDuration = messageTransitionDuration;
+    message.style.backgroundColor = "rgba(0, 0, 0, 1.0)";
+    proceedVar.innerHTML = "BACK TO MAP";
+    proceedVar.style.color = '#FFD800';
+    proceedVar.style.borderColor = '#FFD800';
+    sleep(messageTransitionDuration * 2000).then(() => {
+        message.style.display = "block";
+        message.style.color = "rgba(255, 255, 0, 1.0)";
+    });
 }
 
 //displaying arrow pointing at station on map
@@ -227,21 +246,21 @@ function load_txtFile(episodeStr, target) {
 }
 
 //loading welcome Message after clicking anywhere
-function load_welcomeTxtFile() {
+function load_txtMessage(nameTxt) {
     var txtFile = new XMLHttpRequest();
-    txtFile.open("GET", "assets/txt/welcomeMessage.txt", true);
+    txtFile.open("GET", "assets/txt/" + nameTxt, true);
     txtFile.onreadystatechange = function () {
         if (txtFile.readyState === 4 && txtFile.status == 200)
             content = txtFile.responseText;
-        document.getElementById("welcomeMessage").innerHTML = content;
-        document.getElementById("welcomeMessage").appendChild(proceedVar);
+        document.getElementById("screenMessage").innerHTML = content;
+        document.getElementById("screenMessage").appendChild(proceedVar);
     }
     txtFile.send(null);
 }
 
 const sleep = (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms))
-}
+};
 
 //decryption to make keywords less visible by Web Inspector, encrypt()-function on Spaces
 function decrypt_fromKey(encrypt, key) {
@@ -251,3 +270,13 @@ function decrypt_fromKey(encrypt, key) {
     }
     return decryption;
 }
+
+var encrypts = [['iu^hfZdfdZiuZcg#jHGg!'], 
+                ['hdpj]ihcc[^gghdpj]ihcc[^gg'], 
+                ['fksdd\`^fXZf_[_cSZ\PVQWMfksdd\`^fXZf_[_cSZ\PVQWM', 
+                 'fksdd\`^fXZf_[_cSZ\PVQWMfksdd\`^fXZf_[_cSZ\PVQWM', 
+                 'bdpieim]dfZ`[aWPW_\Z\]bdpieim]dfZ`[aWPW_\Z\]', 
+                 'fksdd\`^fjZacW]X^Tfksdd\`^fjZacW]X^T', 
+                 'tdkmagbh^W^fcacdtdkmagbh^W^fcacd', 
+                 'tdkmagbh^tdkmagbh^',
+		         'bdpieim]dfZ`[aWbdpieim]dfZ`[aW']];
