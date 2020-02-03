@@ -182,7 +182,7 @@ function open_exitMessage(message) {
     proceedVar.innerHTML = "BACK TO MAP";
     proceedVar.style.color = '#FFD800';
     proceedVar.style.borderColor = '#FFD800';
-    sleep(messageTransitionDuration * 2000).then(() => {
+    sleep((messageTransitionDuration * 2000) + 1500).then(() => {
         message.style.display = "block";
         message.style.color = "rgba(255, 255, 0, 1.0)";
     });
