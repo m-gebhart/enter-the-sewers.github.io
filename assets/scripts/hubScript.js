@@ -56,11 +56,14 @@ function close_screenMessage(message) {
     message.style.backgroundColor = "rgba(0, 0, 0, 0.0)";
     message.style.color = "rgba(255, 255, 0, 0.0)";
     document.getElementById("map").style.opacity = '1';
-    sleep(1000).then(() => {
+    sleep(100).then(() => {
         message.removeChild(proceedVar);
         message.style.display = "none";
-        welcomeMessagePassed = true;
-        message.innerHTML = '';
+	message.style.transitionDuration = messageTransitionDuration;
+        message.style.opacity = "0";
+	sleep(100).then(() => {
+            welcomeMessagePassed = true;
+            message.innerHTML = ''; });
 
         //unlocking episode 1
         unlock_arrow(1);
