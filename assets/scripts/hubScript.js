@@ -14,29 +14,48 @@ var textDelay = 1.5;
 var closeVar;
 var proceedVar;
 var popUpOpacity = 1;
+var screenMessage;
 
 window.onclick = function (event) {
     //start: clickAnywhere for welcomeMessage
     if (!welcomeMessagePassed && progressionInt == 0)
-        open_welcomeMessage(document.getElementById('screenMessage'));
+        open_welcomeMessage();
 
     //closing popUp when clicking outside of it
     if (displayed && (event.target.classList.contains("map")
         || event.target.classList.contains("underground_map")
         || event.target.classList.contains("background")))
         close_PopUp();
-}
+};
 
 //open welcomeMessage after clicking anywhere
-function open_welcomeMessage(message) {
+function open_welcomeMessage() {
     proceedVar = document.getElementById("proceed");
-    document.getElementById("map").style.opacity = '0';
-    load_txtMessage("welcomeMessage.txt");
-    message.style.transitionDuration = messageTransitionDuration;
-    message.style.backgroundColor = "rgba(0, 0, 0, 1.0)";
-    sleep(400).then(() => {
-        message.style.display = "block";
-        message.style.color = "rgba(255, 255, 0, 1.0)";
+    screenMessage = document.getElementById("screenMessage");
+    open_screenMessage(true);
+}
+
+function open_exitMessage() {
+    open_screenMessage(false);
+}
+
+//full-screen Message for opening and ending
+function open_screenMessage(startMessage) {
+    if (startMessage)
+        load_txtMessage("welcomeMessage.txt");
+    else 
+        load_txtMessage("exitMessage.txt");
+    screenMessage.style.transitionDuration = messageTransitionDuration;
+    screenMessage.style.opacity = "1";
+    screenMessage.style.display = "block";
+    sleep(200).then(() => {
+        if (!startMessage) {
+            proceedVar.innerHTML = "BACK TO MAP";
+            proceedVar.style.color = '#FFD800';
+            proceedVar.style.borderColor = '#FFD800';
+        }
+        screenMessage.style.opacity = "1";
+        document.getElementById("map").style.opacity = '0';
     });
 }
 
@@ -51,19 +70,14 @@ window.onkeypress = function(event) {
         proceed();
 }
 
-function close_screenMessage(message) {
-    var message = document.getElementById('screenMessage');
-    message.style.backgroundColor = "rgba(0, 0, 0, 0.0)";
-    message.style.color = "rgba(255, 255, 0, 0.0)";
+function close_screenMessage() {
+    screenMessage.style.transitionDuration = messageTransitionDuration;
+    screenMessage.style.opacity = "0";
     document.getElementById("map").style.opacity = '1';
-    sleep(100).then(() => {
-        message.removeChild(proceedVar);
-        message.style.display = "none";
-	message.style.transitionDuration = messageTransitionDuration;
-        message.style.opacity = "0";
-	sleep(100).then(() => {
-            welcomeMessagePassed = true;
-            message.innerHTML = ''; });
+    sleep(1000).then(() => {
+        screenMessage.style.display = "none";
+        welcomeMessagePassed = true;
+        screenMessage.innerHTML = '';
 
         //unlocking episode 1
         unlock_arrow(1);
@@ -139,7 +153,6 @@ function create_episodePopUp(episodeInt){
     }
 }
 
-
 function put_inFocus(element) {
     element.focus();
     element.classList.toggle("textFieldInFocus", true);
@@ -174,21 +187,7 @@ function unlock_nextEpisode() {
     if (progressionInt < 4)
         unlock_arrow(progressionInt);
     else
-        open_exitMessage(document.getElementById('screenMessage'));
-}
-
-function open_exitMessage(message) {
-    document.getElementById("map").style.opacity = '0';
-    load_txtMessage("exitMessage.txt");
-    message.style.transitionDuration = messageTransitionDuration;
-    message.style.backgroundColor = "rgba(0, 0, 0, 1.0)";
-    proceedVar.innerHTML = "BACK TO MAP";
-    proceedVar.style.color = '#FFD800';
-    proceedVar.style.borderColor = '#FFD800';
-    sleep(3500).then(() => {
-        message.style.display = "block";
-        message.style.color = "rgba(255, 255, 0, 1.0)";
-    });
+        open_exitMessage();
 }
 
 //displaying arrow pointing at station on map
@@ -250,13 +249,14 @@ function load_txtFile(episodeStr, target) {
 
 //loading welcome Message after clicking anywhere
 function load_txtMessage(nameTxt) {
+    screenMessage.innerHTML = '';
     var txtFile = new XMLHttpRequest();
     txtFile.open("GET", "assets/txt/" + nameTxt, true);
     txtFile.onreadystatechange = function () {
         if (txtFile.readyState === 4 && txtFile.status == 200)
             content = txtFile.responseText;
-        document.getElementById("screenMessage").innerHTML = content;
-        document.getElementById("screenMessage").appendChild(proceedVar);
+        screenMessage.innerHTML = content;
+        screenMessage.appendChild(proceedVar);
     }
     txtFile.send(null);
 }

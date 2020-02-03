@@ -27,7 +27,8 @@ a:visited {
     z-index: 3;
     padding-top: 15vh;
     padding-left: 5vw;
-    color: rgba(255, 255, 0, 0);
+    color: rgba(255, 255, 0, 1);
+    background-color: black;
     line-height: 200%;
 }
 
